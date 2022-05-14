@@ -3,12 +3,16 @@ package com.drsync.paging3example
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drsync.paging3example.databinding.ActivityMainBinding
 import com.drsync.paging3example.ui.barang.BarangAdapter
 import com.drsync.paging3example.ui.barang.BarangLoadStateAdapter
 import com.drsync.paging3example.ui.barang.BarangViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -33,8 +37,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        viewModel.barang.observe(this){
-            barangAdapter.submitData(lifecycle, it)
+        lifecycleScope.launch {
+            viewModel.getBarang().collect{ barang ->
+                barangAdapter.submitData(barang)
+            }
         }
 
     }

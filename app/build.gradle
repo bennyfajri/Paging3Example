@@ -48,6 +48,7 @@ dependencies {
 
     // Paging 3
     implementation "androidx.paging:paging-runtime:3.1.1"
+    implementation "androidx.room:room-paging:2.5.0-alpha01"
 
     // Retrofit + GSON
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
@@ -63,4 +64,8 @@ dependencies {
 
     // Navigation Component
     implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
+
+    //Room
+    implementation 'androidx.room:room-ktx:2.5.0-alpha01'
+    kapt 'androidx.room:room-compiler:2.5.0-alpha01'
 }

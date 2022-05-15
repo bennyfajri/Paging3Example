@@ -1,6 +1,7 @@
 package com.drsync.paging3example.di
 
 import com.drsync.paging3example.api.ApiConfig
+import com.drsync.paging3example.database.BarangDatabase
 import com.drsync.paging3example.util.Constant.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -41,4 +42,12 @@ object AppModule {
     fun providesApi(retrofit: Retrofit): ApiConfig {
         return retrofit.create(ApiConfig::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideBarangDao(db: BarangDatabase) = db.barangDao()
+
+    @Provides
+    @Singleton
+    fun provideRemoteKeysDao(db: BarangDatabase) = db.remoteKeysDao()
 }

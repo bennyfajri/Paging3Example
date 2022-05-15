@@ -2,7 +2,7 @@ package com.drsync.paging3example.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ModelBarang(
+data class BarangResponse(
     val status: Boolean,
     @SerializedName("total_pages")
     val totalPages: Int,

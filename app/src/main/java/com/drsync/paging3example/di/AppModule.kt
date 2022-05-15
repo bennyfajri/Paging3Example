@@ -1,11 +1,14 @@
 package com.drsync.paging3example.di
 
+import android.content.Context
+import androidx.room.Room
 import com.drsync.paging3example.api.ApiConfig
 import com.drsync.paging3example.database.BarangDatabase
 import com.drsync.paging3example.util.Constant.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,6 +45,15 @@ object AppModule {
     fun providesApi(retrofit: Retrofit): ApiConfig {
         return retrofit.create(ApiConfig::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideBarangDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context, BarangDatabase::class.java,
+        "db_barang"
+    ).build()
 
     @Provides
     @Singleton
